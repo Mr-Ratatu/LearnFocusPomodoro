@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/listCompletedTasksFragment">
+
+    <fragment
+        android:id="@+id/timerScreenFragment"
+        android:name="com.learn.focus.pomodoro.app.ui.fragment.TimerScreenFragment"
+        android:label=""
+        tools:layout="@layout/fragment_timer_screen" >
+        <action
+            android:id="@+id/action_created_task"
+            app:destination="@id/createdTaskPomodoroFragment" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/listCompletedTasksFragment"
+        android:name="com.learn.focus.pomodoro.app.ui.fragment.ListCompletedTasksFragment"
+        android:label="Список задач"
+        tools:layout="@layout/fragment_list_completed_tasks" />
+    <fragment
+        android:id="@+id/createdTaskPomodoroFragment"
+        android:name="com.learn.focus.pomodoro.app.ui.fragment.CreatedTaskPomodoroFragment"
+        android:label="CreatedTaskPomodoroFragment" >
+        <action
+            android:id="@+id/action_createdTaskPomodoroFragment_to_timerScreenFragment"
+            app:destination="@id/timerScreenFragment" />
+    </fragment>
+</navigation>

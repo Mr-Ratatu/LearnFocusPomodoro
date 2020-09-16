@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ED2B1D</color>
+    <color name="colorPrimaryDark">#FB6435</color>
+    <color name="colorAccent">#00BCD4</color>
+
+    <color name="taskDone">#4CAF50</color>
+    <color name="inProgress">#ED2B1D</color>
+
+    <color name="gray_background">#EFEFEF</color>
+
+    <color name="positiveButtonTextColor">@color/colorAccent</color>
+    <color name="negativeButtonTextColor">@color/colorAccent</color>
+    <color name="bottomSheetDividerColor">#F5F5F5</color>
+</resources>
