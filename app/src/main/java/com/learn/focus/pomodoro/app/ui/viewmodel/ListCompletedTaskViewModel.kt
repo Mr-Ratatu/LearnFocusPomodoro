@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.learn.focus.pomodoro.app.data.db.DatabaseManager
 import com.learn.focus.pomodoro.app.extension.Event
 import com.learn.focus.pomodoro.app.repository.TimerTaskRepository
-import com.learn.focus.pomodoro.app.utils.Constants.Companion.DIALOG
+import com.learn.focus.pomodoro.app.utils.AppConstants.Companion.DIALOG
 
 class ListCompletedTaskViewModel(application: Application) : AndroidViewModel(application) {
 

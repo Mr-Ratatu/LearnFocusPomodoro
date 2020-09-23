@@ -16,7 +16,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
-    private lateinit var drawerLayout: DrawerLayout
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,16 +23,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         navController = findNavController(R.id.fragment)
-        drawerLayout = findViewById(R.id.drawer_layout)
-        NavigationUI.setupWithNavController(navigation, navController)
 
-        appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
+        bottomNavigationView.setupWithNavController(navController)
 
-        findViewById<ImageView>(R.id.navigation_button).setOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
-        }
-
-        titleFragment.text = navController.currentDestination?.label
     }
 
 }

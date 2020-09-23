@@ -22,7 +22,7 @@
         tools:context=".ui.fragment.TimerScreenFragment">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/materialTextView"
+            android:id="@+id/timer_countdown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/acme"
@@ -35,55 +35,49 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ProgressBar
-            android:id="@+id/progressBar"
+            android:id="@+id/progress_countdown"
             style="@style/CircularDeterminateProgressBar"
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:progress="60"
-            app:layout_constraintBottom_toBottomOf="@+id/materialTextView"
-            app:layout_constraintEnd_toEndOf="@+id/materialTextView"
-            app:layout_constraintStart_toStartOf="@+id/materialTextView"
-            app:layout_constraintTop_toTopOf="@+id/materialTextView" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/materialTextView2"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_add"
-            app:backgroundTint="@android:color/white"
-            app:borderWidth="0dp"
-            app:fabCustomSize="70dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/progressBar"
-            app:layout_constraintStart_toStartOf="@+id/progressBar"
-            app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+            app:layout_constraintBottom_toBottomOf="@+id/timer_countdown"
+            app:layout_constraintEnd_toEndOf="@+id/timer_countdown"
+            app:layout_constraintStart_toStartOf="@+id/timer_countdown"
+            app:layout_constraintTop_toTopOf="@+id/timer_countdown" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/progressBar"
-            app:layout_constraintStart_toStartOf="@+id/progressBar"
-            app:layout_constraintTop_toBottomOf="@+id/progressBar">
+            app:layout_constraintEnd_toEndOf="@+id/progress_countdown"
+            app:layout_constraintStart_toStartOf="@+id/progress_countdown"
+            app:layout_constraintTop_toBottomOf="@+id/progress_countdown">
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:layout_gravity="center"
+                android:layout_margin="20dp"
                 android:background="@drawable/circle_button"
                 android:foreground="?attr/selectableItemBackground"
-                android:padding="10dp"
-                android:src="@drawable/ic_stop" />
+                android:onClick="@{() -> viewModel.stopTimer()}"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_stop"
+                app:backgroundTint="@android:color/white"
+                app:borderWidth="0dp"
+                app:fabCustomSize="70dp"
+                app:tint="@color/colorPrimaryDark" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="25dp"
-                android:foreground="?attr/selectableItemBackground"
-                android:src="@drawable/ic_pause" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="20dp"
+                android:onClick="@{() -> viewModel.startTimer()}"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_play"
+                app:backgroundTint="@android:color/white"
+                app:borderWidth="0dp"
+                app:fabCustomSize="70dp"
+                app:tint="@color/colorPrimaryDark" />
 
         </LinearLayout>
 
@@ -98,7 +92,7 @@
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/progressBar"
+            app:layout_constraintBottom_toTopOf="@+id/progress_countdown"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

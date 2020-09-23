@@ -6,16 +6,11 @@ import android.graphics.Color
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.*
-import androidx.navigation.findNavController
-import com.github.dhaval2404.colorpicker.ColorPickerDialog
-import com.github.dhaval2404.colorpicker.model.ColorShape
-import com.google.android.material.snackbar.Snackbar
 import com.learn.focus.pomodoro.app.data.db.DatabaseManager
 import com.learn.focus.pomodoro.app.data.model.TimerTask
 import com.learn.focus.pomodoro.app.repository.TimerTaskRepository
-import com.learn.focus.pomodoro.app.utils.Constants.Companion.DIALOG
 import com.learn.focus.pomodoro.app.extension.Event
-import com.learn.focus.pomodoro.app.ui.fragment.CreatedTaskPomodoroFragmentDirections
+import com.learn.focus.pomodoro.app.utils.AppConstants.Companion.DIALOG
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -39,7 +34,7 @@ class CreatedTaskViewModel(application: Application) : AndroidViewModel(applicat
         timerTaskRepository = TimerTaskRepository(timerTaskDao)
     }
 
-    fun closeFragmentClick(view: View) {
+    fun closeFragmentClick() {
         _closeDialog.value =
             Event(DIALOG)
     }
@@ -53,7 +48,7 @@ class CreatedTaskViewModel(application: Application) : AndroidViewModel(applicat
             return
         }
 
-        insert(TimerTask(null, title.value, 0, colorView.value, true))
+        insert(TimerTask(null, title.value, 0, colorView.value, false))
 
         keyBoard.hideSoftInputFromWindow(view.windowToken, 0)
 
@@ -61,18 +56,8 @@ class CreatedTaskViewModel(application: Application) : AndroidViewModel(applicat
             Event(DIALOG)
     }
 
-    fun chooseColorClick(view: View) {
-        ColorPickerDialog
-            .Builder(view.context)
-            .setColorShape(ColorShape.SQAURE)
-            .setDefaultColor(Color.RED)
-            .setTitle("Выбрать цвет")
-            .setColorListener { color, colorHex ->
-                // Handle Color Selection
-                colorView.value = color
-                _setColorView.value = Event(color)
-            }
-            .show()
+    fun chooseColorClick() {
+        _setColorView.value = Event(Color.RED)
     }
 
     private fun insert(timerTask: TimerTask) =

@@ -3,31 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/listCompletedTasksFragment">
+    app:startDestination="@id/timerScreenFragment">
 
     <fragment
         android:id="@+id/timerScreenFragment"
         android:name="com.learn.focus.pomodoro.app.ui.fragment.TimerScreenFragment"
         android:label=""
         tools:layout="@layout/fragment_timer_screen" >
-        <action
-            android:id="@+id/action_created_task"
-            app:destination="@id/createdTaskPomodoroFragment" />
         <argument
-            android:name="title"
-            app:argType="string" />
+            android:name="timerTask"
+            app:argType="com.learn.focus.pomodoro.app.data.model.TimerTask" />
+        <action
+            android:id="@+id/action_timer_to_list"
+            app:destination="@id/listCompletedTasksFragment" />
     </fragment>
     <fragment
         android:id="@+id/listCompletedTasksFragment"
         android:name="com.learn.focus.pomodoro.app.ui.fragment.ListCompletedTasksFragment"
         android:label="Список задач"
-        tools:layout="@layout/fragment_list_completed_tasks" />
-    <fragment
-        android:id="@+id/createdTaskPomodoroFragment"
-        android:name="com.learn.focus.pomodoro.app.ui.fragment.CreatedTaskPomodoroFragment"
-        android:label="CreatedTaskPomodoroFragment" >
+        tools:layout="@layout/fragment_list_completed_tasks" >
         <action
-            android:id="@+id/action_createdTaskPomodoroFragment_to_timerScreenFragment"
+            android:id="@+id/action_list_to_timer"
             app:destination="@id/timerScreenFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.learn.focus.pomodoro.app.ui.fragment.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

@@ -16,6 +16,9 @@ interface TimerTaskDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(timerTask: TimerTask)
 
+    @Update
+    suspend fun update(timerTask: TimerTask)
+
     @Delete
     suspend fun delete(timerTask: TimerTask)
 }

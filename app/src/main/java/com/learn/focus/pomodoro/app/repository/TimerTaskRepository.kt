@@ -13,4 +13,12 @@ class TimerTaskRepository(private val timerTaskDao: TimerTaskDao) {
         timerTaskDao.insert(timerTask)
     }
 
+    suspend fun update(timerTask: TimerTask) {
+        timerTaskDao.update(timerTask)
+    }
+
+    suspend fun delete(timerTask: TimerTask) {
+        timerTaskDao.delete(timerTask)
+    }
+
 }

@@ -11,9 +11,7 @@ import androidx.lifecycle.Observer
 import com.learn.focus.pomodoro.app.R
 import com.learn.focus.pomodoro.app.databinding.FragmentListCompletedTasksBinding
 import com.learn.focus.pomodoro.app.ui.adapter.TimerTaskAdapter
-import com.learn.focus.pomodoro.app.ui.viewmodel.CreatedTaskViewModel
 import com.learn.focus.pomodoro.app.ui.viewmodel.ListCompletedTaskViewModel
-import com.learn.focus.pomodoro.app.utils.Constants.Companion.DIALOG
 
 class ListCompletedTasksFragment : Fragment() {
 

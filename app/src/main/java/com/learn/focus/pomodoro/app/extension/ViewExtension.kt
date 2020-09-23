@@ -9,6 +9,13 @@ fun View.gone(emptyList: Int) {
     }
 }
 
+fun View.gone(visibleButton: Boolean) {
+    visibility = when (visibleButton) {
+        false -> View.VISIBLE
+        else -> View.INVISIBLE
+    }
+}
+
 fun View.gone(title: String?) {
     visibility = if (title.isNullOrEmpty()) {
         View.GONE

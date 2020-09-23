@@ -1,6 +1,7 @@
 package com.learn.focus.pomodoro.app.binding
 
 import android.view.View
+import android.widget.LinearLayout
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
@@ -32,13 +33,17 @@ fun setTaskDone(view: MaterialTextView, done: Boolean?) {
             view.apply {
                 setText(R.string.taskDone)
                 setTextColor(view.resources.getColor(R.color.taskDone, null))
-
             }
         else ->
             view.apply {
                 setText(R.string.inProgress)
                 setTextColor(view.resources.getColor(R.color.inProgress, null))
-
             }
     }
 }
+
+@BindingAdapter("visibleButton")
+fun setVisibleButton(view: View, visible: Boolean) {
+    view.gone(visible)
+}
+

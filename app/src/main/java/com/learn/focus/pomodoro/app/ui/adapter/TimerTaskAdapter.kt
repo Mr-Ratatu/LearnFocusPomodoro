@@ -3,18 +3,24 @@ package com.learn.focus.pomodoro.app.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.learn.focus.pomodoro.app.R
 import com.learn.focus.pomodoro.app.data.model.TimerTask
 import com.learn.focus.pomodoro.app.databinding.TimerTaskItemBinding
+import com.learn.focus.pomodoro.app.ui.viewmodel.ItemViewModel
+import com.learn.focus.pomodoro.app.utils.TimerDiffUtils
 
 class TimerTaskAdapter : RecyclerView.Adapter<TimerTaskAdapter.TimerTaskViewHolder>() {
 
     private var items = emptyList<TimerTask>()
 
     fun setData(list: List<TimerTask>) {
-        items = list
-        notifyDataSetChanged()
+        val timerDiffUtils = TimerDiffUtils(items, list)
+        val timerDiffResult = DiffUtil.calculateDiff(timerDiffUtils)
+        this.items = list
+        timerDiffResult.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimerTaskViewHolder =
@@ -32,6 +38,8 @@ class TimerTaskAdapter : RecyclerView.Adapter<TimerTaskAdapter.TimerTaskViewHold
     override fun onBindViewHolder(holder: TimerTaskViewHolder, position: Int) {
         holder.binding.apply {
             timerTask = items[position]
+            itemViewModel = ItemViewModel(holder.itemView.context)
+
             executePendingBindings()
         }
     }
