@@ -9,7 +9,5 @@
 
     <color name="gray_background">#EFEFEF</color>
 
-    <color name="positiveButtonTextColor">@color/colorAccent</color>
-    <color name="negativeButtonTextColor">@color/colorAccent</color>
-    <color name="bottomSheetDividerColor">#F5F5F5</color>
+
 </resources>

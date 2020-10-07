@@ -1,4 +1,4 @@
-package com.learn.focus.pomodoro.app.extension
+package com.learn.focus.pomodoro.app.utils
 
 open class Event<out T>(private val content: T) {
 

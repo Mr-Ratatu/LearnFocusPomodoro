@@ -1,6 +1,7 @@
 package com.learn.focus.pomodoro.app.extension
 
 import android.view.View
+import com.learn.focus.pomodoro.app.R
 
 fun View.gone(emptyList: Int) {
     visibility = when (emptyList) {
@@ -23,4 +24,5 @@ fun View.gone(title: String?) {
         View.VISIBLE
     }
 }
+
 

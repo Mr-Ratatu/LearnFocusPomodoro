@@ -7,83 +7,128 @@
 
         <variable
             name="viewModel"
-            type="com.learn.focus.pomodoro.app.ui.viewmodel.TimerScreenViewModel" />
+            type="com.learn.focus.pomodoro.app.ui.fragment.timer.TimerScreenViewModel" />
 
         <variable
             name="title"
             type="String" />
+
+        <variable
+            name="backgroundColor"
+            type="Integer" />
+
+        <variable
+            name="timerCountDown"
+            type="String" />
+
+        <variable
+            name="progress"
+            type="Integer" />
+
+        <variable
+            name="max"
+            type="Integer" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/main_background"
-        tools:context=".ui.fragment.TimerScreenFragment">
+        android:background="@{backgroundColor}"
+        tools:background="@drawable/main_background"
+        tools:context=".ui.fragment.timer.TimerScreenFragment">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/timer_countdown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/acme"
-            android:text="25:00"
+            android:text="@{timerCountDown}"
             android:textColor="@android:color/white"
             android:textSize="64sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="25:00" />
 
         <ProgressBar
             android:id="@+id/progress_countdown"
             style="@style/CircularDeterminateProgressBar"
             android:layout_width="300dp"
             android:layout_height="300dp"
-            android:progress="60"
+            android:progress="@{progress}"
+            android:max="@{max}"
             app:layout_constraintBottom_toBottomOf="@+id/timer_countdown"
             app:layout_constraintEnd_toEndOf="@+id/timer_countdown"
             app:layout_constraintStart_toStartOf="@+id/timer_countdown"
-            app:layout_constraintTop_toTopOf="@+id/timer_countdown" />
+            app:layout_constraintTop_toTopOf="@+id/timer_countdown"
+            tools:progress="60" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/progress_countdown"
             app:layout_constraintStart_toStartOf="@+id/progress_countdown"
             app:layout_constraintTop_toBottomOf="@+id/progress_countdown">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:id="@+id/stop_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:background="@drawable/circle_button"
-                android:foreground="?attr/selectableItemBackground"
                 android:onClick="@{() -> viewModel.stopTimer()}"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_stop"
                 app:backgroundTint="@android:color/white"
                 app:borderWidth="0dp"
-                app:fabCustomSize="70dp"
                 app:tint="@color/colorPrimaryDark" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:id="@+id/start_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:onClick="@{() -> viewModel.startTimer()}"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_play"
                 app:backgroundTint="@android:color/white"
                 app:borderWidth="0dp"
-                app:fabCustomSize="70dp"
+                app:tint="@color/colorPrimaryDark" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/paused"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:onClick="@{() -> viewModel.pausedTimer()}"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_pause"
+                app:backgroundTint="@android:color/white"
+                app:borderWidth="0dp"
+                app:tint="@color/colorPrimaryDark" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/timer_break"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:onClick="@{() -> viewModel.breakTimer()}"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_break"
+                app:backgroundTint="@android:color/white"
+                app:borderWidth="0dp"
                 app:tint="@color/colorPrimaryDark" />
 
         </LinearLayout>
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title_task_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
@@ -95,7 +140,6 @@
             app:layout_constraintBottom_toTopOf="@+id/progress_countdown"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:titleVisible="@{title}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

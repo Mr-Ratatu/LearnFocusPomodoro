@@ -14,7 +14,6 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.learn.focus.pomodoro.app.R
 import com.learn.focus.pomodoro.app.ui.activity.MainActivity
-import com.learn.focus.pomodoro.app.ui.fragment.TimerScreenFragment
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -54,6 +53,13 @@ class NotificationUtil {
                 0, stopIntent, PendingIntent.FLAG_UPDATE_CURRENT
             )
 
+            val pauseIntent = Intent(context, TimerNotificationActionReceiver::class.java)
+            pauseIntent.action = AppConstants.ACTION_PAUSE
+            val pausePendingIntent = PendingIntent.getBroadcast(
+                context,
+                0, pauseIntent, PendingIntent.FLAG_UPDATE_CURRENT
+            )
+
             val df = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT)
 
             val nBuilder = getBasicNotificationBuilder(context, CHANNEL_ID_TIMER, true)
@@ -62,6 +68,7 @@ class NotificationUtil {
                 .setContentIntent(getPendingIntentWithStack(context, MainActivity::class.java))
                 .setOngoing(true)
                 .addAction(R.drawable.ic_stop, "Стоп", stopPendingIntent)
+                .addAction(R.drawable.ic_pause, "Пауза", pausePendingIntent)
 
             val nManager =
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -70,7 +77,7 @@ class NotificationUtil {
             nManager.notify(TIMER_ID, nBuilder.build())
         }
 
-        /*fun showTimerPaused(context: Context) {
+        fun showTimerPaused(context: Context) {
             val resumeIntent = Intent(context, TimerNotificationActionReceiver::class.java)
             resumeIntent.action = AppConstants.ACTION_RESUME
             val resumePendingIntent = PendingIntent.getBroadcast(
@@ -90,7 +97,7 @@ class NotificationUtil {
             nManager.createNotificationChannel(CHANNEL_ID_TIMER, CHANNEL_NAME_TIMER, true)
 
             nManager.notify(TIMER_ID, nBuilder.build())
-        }*/
+        }
 
         fun hideTimerNotification(context: Context) {
             val nManager =
@@ -128,7 +135,7 @@ class NotificationUtil {
             return stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
         }
 
-        @TargetApi(26)
+        @TargetApi(30)
         private fun NotificationManager.createNotificationChannel(
             channelID: String,
             channelName: String,

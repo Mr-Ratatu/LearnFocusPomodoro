@@ -1,19 +1,14 @@
-package com.learn.focus.pomodoro.app.ui.viewmodel
+package com.learn.focus.pomodoro.app.ui.fragment.list
 
 import android.app.Application
+import android.view.View
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.navigation.findNavController
+import com.learn.focus.pomodoro.app.R
 import com.learn.focus.pomodoro.app.data.db.DatabaseManager
-import com.learn.focus.pomodoro.app.extension.Event
 import com.learn.focus.pomodoro.app.repository.TimerTaskRepository
-import com.learn.focus.pomodoro.app.utils.AppConstants.Companion.DIALOG
 
 class ListCompletedTaskViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val _showDialog = MutableLiveData<Event<String>>()
-    val showDialog: LiveData<Event<String>>
-        get() = _showDialog
 
     private val timerTaskRepository: TimerTaskRepository
 
@@ -25,8 +20,8 @@ class ListCompletedTaskViewModel(application: Application) : AndroidViewModel(ap
     val listTimerTask = timerTaskRepository.listTaskTimer
     val checkOnEmptyDB = timerTaskRepository.checkOnEmptyDB
 
-    fun showCreteTaskDialog() {
-        _showDialog.value = Event(DIALOG)
+    fun showCreteTaskScreen(view: View) {
+        view.findNavController().navigate(R.id.action_list_to_createdTask)
     }
 
 }

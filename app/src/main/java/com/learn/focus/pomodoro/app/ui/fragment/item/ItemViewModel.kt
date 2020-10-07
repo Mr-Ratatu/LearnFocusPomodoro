@@ -1,8 +1,9 @@
-package com.learn.focus.pomodoro.app.ui.viewmodel
+package com.learn.focus.pomodoro.app.ui.fragment.item
 
 import android.content.Context
 import android.view.View
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
@@ -10,7 +11,10 @@ import com.learn.focus.pomodoro.app.R
 import com.learn.focus.pomodoro.app.data.db.DatabaseManager
 import com.learn.focus.pomodoro.app.data.model.TimerTask
 import com.learn.focus.pomodoro.app.repository.TimerTaskRepository
-import com.learn.focus.pomodoro.app.ui.fragment.ListCompletedTasksFragmentDirections
+import com.learn.focus.pomodoro.app.ui.fragment.dialog.DeleteItemDialog
+import com.learn.focus.pomodoro.app.ui.fragment.list.ListCompletedTasksFragmentDirections
+import com.learn.focus.pomodoro.app.utils.PrefUtil
+import com.learn.focus.pomodoro.app.utils.TimerState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -35,6 +39,10 @@ class ItemViewModel(context: Context) : ViewModel() {
         popupMenu.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.edit_item -> {
+                    val action =
+                        ListCompletedTasksFragmentDirections.actionListToCreatedTask(timerTask)
+
+                    view.findNavController().navigate(action)
                     true
                 }
                 R.id.remove_item -> {

@@ -7,13 +7,17 @@
 
         <variable
             name="viewModel"
-            type="com.learn.focus.pomodoro.app.ui.viewmodel.CreatedTaskViewModel" />
+            type="com.learn.focus.pomodoro.app.ui.fragment.create.CreatedTaskViewModel" />
+
+        <variable
+            name="timerTask"
+            type="com.learn.focus.pomodoro.app.data.model.TimerTask" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="match_parent"
         android:background="@color/gray_background">
 
         <androidx.appcompat.widget.Toolbar
@@ -35,7 +39,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:background="@drawable/ripple_effect_buttons"
-                    android:onClick="@{() -> viewModel.closeFragmentClick()}"
+                    android:onClick="@{view -> viewModel.closeFragmentClick(view)}"
                     android:src="@drawable/ic_close"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -44,14 +48,15 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Создать задачу"
                     android:textColor="@android:color/white"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/appCompatImageView2"
                     app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:setTitleFragment="@{viewModel.title}"
+                    tools:text="Создать задачу" />
 
                 <ImageView
                     android:id="@+id/appCompatImageView2"
@@ -59,7 +64,7 @@
                     android:layout_height="32dp"
                     android:layout_marginEnd="15dp"
                     android:background="@drawable/ripple_effect_buttons"
-                    android:onClick="@{view -> viewModel.createTaskTimer(view)}"
+                    android:onClick="@{view -> viewModel.createTaskTimer(view, timerTask)}"
                     android:src="@drawable/ic_check"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -83,7 +88,7 @@
                 android:id="@+id/color_bar"
                 android:layout_width="10dp"
                 android:layout_height="0dp"
-                android:background="@android:color/holo_red_dark"
+                android:background="@{viewModel.colorView}"
                 app:layout_constraintBottom_toBottomOf="@+id/layout1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -110,12 +115,10 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="5dp"
-            android:layout_marginBottom="20dp"
             android:elevation="4dp"
             android:onClick="@{() -> viewModel.chooseColorClick()}"
             android:text="Выбрать цвет"
             android:textAllCaps="false"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout1" />

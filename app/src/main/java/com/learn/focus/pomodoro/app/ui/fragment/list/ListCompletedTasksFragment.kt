@@ -1,4 +1,4 @@
-package com.learn.focus.pomodoro.app.ui.fragment
+package com.learn.focus.pomodoro.app.ui.fragment.list
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,7 +11,6 @@ import androidx.lifecycle.Observer
 import com.learn.focus.pomodoro.app.R
 import com.learn.focus.pomodoro.app.databinding.FragmentListCompletedTasksBinding
 import com.learn.focus.pomodoro.app.ui.adapter.TimerTaskAdapter
-import com.learn.focus.pomodoro.app.ui.viewmodel.ListCompletedTaskViewModel
 
 class ListCompletedTasksFragment : Fragment() {
 
@@ -49,12 +48,6 @@ class ListCompletedTasksFragment : Fragment() {
 
         listViewModel.checkOnEmptyDB.observe(viewLifecycleOwner, Observer {
             binding.dbSize = it
-        })
-
-        listViewModel.showDialog.observe(viewLifecycleOwner, Observer {
-            it.getContentIfNotHandled()?.let { text ->
-                CreatedTaskPomodoroFragment().show(childFragmentManager, text)
-            }
         })
 
     }

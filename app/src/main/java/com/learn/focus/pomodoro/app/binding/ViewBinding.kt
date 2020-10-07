@@ -3,6 +3,7 @@ package com.learn.focus.pomodoro.app.binding
 import android.view.View
 import android.widget.LinearLayout
 import androidx.databinding.BindingAdapter
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
 import com.learn.focus.pomodoro.app.R
@@ -47,3 +48,10 @@ fun setVisibleButton(view: View, visible: Boolean) {
     view.gone(visible)
 }
 
+@BindingAdapter("setTitleFragment")
+fun setTitleFragment(view: MaterialTextView, field: MutableLiveData<String>) {
+    if (field.value.isNullOrEmpty())
+        view.setText(R.string.create_item)
+    else
+        view.setText(R.string.edit_task)
+}

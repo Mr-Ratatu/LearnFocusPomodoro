@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.learn.focus.pomodoro.app.ui.viewmodel.ListCompletedTaskViewModel" />
+            type="com.learn.focus.pomodoro.app.ui.fragment.list.ListCompletedTaskViewModel" />
 
         <variable
             name="adapter"
@@ -23,121 +23,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray_background"
-        tools:context=".ui.fragment.ListCompletedTasksFragment">
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/info_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardElevation="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/frame_layout">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/materialTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="Общее время концентрации"
-                    android:textSize="12sp"
-                    app:layout_constraintEnd_toStartOf="@+id/partition"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/materialTextView"
-                    app:layout_constraintStart_toStartOf="@+id/materialTextView"
-                    app:layout_constraintTop_toBottomOf="@+id/materialTextView">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/materialTextView9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        tools:text="0"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_marginStart="5dp"
-                        android:text="мин"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <View
-                    android:id="@+id/partition"
-                    android:layout_width="2dp"
-                    android:layout_height="0dp"
-                    android:background="@color/colorPrimary"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/materialTextView2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/materialTextView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="Число выполненных задач"
-                    android:textSize="12sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/partition"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="0"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/materialTextView2"
-                    app:layout_constraintStart_toStartOf="@+id/materialTextView2"
-                    app:layout_constraintTop_toBottomOf="@+id/materialTextView2" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView>
+        tools:context=".ui.fragment.list.ListCompletedTasksFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
             app:adapter="@{adapter}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/info_view"
+            app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/timer_task_item" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
-            android:onClick="@{() -> viewModel.showCreteTaskDialog()}"
+            android:onClick="@{view -> viewModel.showCreteTaskScreen(view)}"
             android:src="@drawable/ic_add"
             app:borderWidth="0dp"
             app:fabCustomSize="70dp"
@@ -171,7 +77,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Список пуст"
+                android:text="@string/list_empty"
                 android:textSize="32sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -12,7 +12,8 @@
 
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>
-    <string name="reply_title">Продолжительность таймера</string>
+    <string name="reply_title">Длина таймера</string>
+    <string name="short_break">Длина короткого перерыва</string>
 
     <!-- Sync Preferences -->
     <string name="sync_title">Sync email periodically</string>
@@ -23,7 +24,13 @@
     <string name="edit_item">Изменить</string>
     <string name="remove_item">Удалить</string>
 
-    <string name="click_for_start">Жми старт, чтобы начать</string>
+    <string name="click_for_start">Задача по умолчанию</string>
     <string name="timer">Таймер</string>
     <string name="settings">Настройки</string>
+    <string name="list_empty">Список пуст</string>
+
+    <string name="create_item">Создать задачу</string>
+    <string name="edit_task">Изменить задачу</string>
+    <string name="settings_timer">Настройки таймера</string>
+
 </resources>

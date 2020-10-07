@@ -1,6 +1,8 @@
-package com.learn.focus.pomodoro.app.ui.viewmodel
+package com.learn.focus.pomodoro.app.ui.fragment.timer
 
 import android.app.Application
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.*
 import com.learn.focus.pomodoro.app.data.db.DatabaseManager
 import com.learn.focus.pomodoro.app.data.db.TimerTaskDao
@@ -27,9 +29,13 @@ class TimerScreenViewModel(application: Application) : AndroidViewModel(applicat
     val stopTimer: LiveData<TimerState>
         get() = _stopTimer
 
-    private val _pauseTimer = MutableLiveData<TimerState>()
-    val pauseTimer: LiveData<TimerState>
-        get() = _pauseTimer
+    private val _pausedTimer = MutableLiveData<TimerState>()
+    val pausedTimer: LiveData<TimerState>
+        get() = _pausedTimer
+
+    private val _breakTimer = MutableLiveData<TimerState>()
+    val breakTimer: LiveData<TimerState>
+        get() = _breakTimer
 
     fun startTimer() {
         _startTimer.value = TimerState.Running
@@ -37,6 +43,14 @@ class TimerScreenViewModel(application: Application) : AndroidViewModel(applicat
 
     fun stopTimer() {
         _stopTimer.value = TimerState.Stopped
+    }
+
+    fun pausedTimer() {
+        _pausedTimer.value = TimerState.Paused
+    }
+
+    fun breakTimer() {
+        _breakTimer.value = TimerState.Running
     }
 
     fun update(timerTask: TimerTask) =
