@@ -23,8 +23,11 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="edit_item">Изменить</string>
     <string name="remove_item">Удалить</string>
+    <string name="choose_color">Выбрать цвет</string>
+    <string name="choose">Выбрать</string>
 
     <string name="click_for_start">Задача по умолчанию</string>
+    <string name="time_for_break">Перерыв</string>
     <string name="timer">Таймер</string>
     <string name="settings">Настройки</string>
     <string name="list_empty">Список пуст</string>

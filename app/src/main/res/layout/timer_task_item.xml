@@ -11,7 +11,7 @@
 
         <variable
             name="itemViewModel"
-            type="com.learn.focus.pomodoro.app.ui.fragment.item.ItemViewModel" />
+            type="com.learn.focus.pomodoro.app.ui.adapter.ItemViewModel" />
 
     </data>
 

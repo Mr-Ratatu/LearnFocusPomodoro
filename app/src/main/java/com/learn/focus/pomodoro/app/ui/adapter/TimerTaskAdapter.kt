@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.learn.focus.pomodoro.app.R
 import com.learn.focus.pomodoro.app.data.model.TimerTask
 import com.learn.focus.pomodoro.app.databinding.TimerTaskItemBinding
-import com.learn.focus.pomodoro.app.ui.fragment.item.ItemViewModel
 import com.learn.focus.pomodoro.app.utils.TimerDiffUtils
 
 class TimerTaskAdapter : RecyclerView.Adapter<TimerTaskAdapter.TimerTaskViewHolder>() {

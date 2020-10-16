@@ -56,8 +56,8 @@
             style="@style/CircularDeterminateProgressBar"
             android:layout_width="300dp"
             android:layout_height="300dp"
-            android:progress="@{progress}"
             android:max="@{max}"
+            android:progress="@{progress}"
             app:layout_constraintBottom_toBottomOf="@+id/timer_countdown"
             app:layout_constraintEnd_toEndOf="@+id/timer_countdown"
             app:layout_constraintStart_toStartOf="@+id/timer_countdown"
@@ -124,23 +124,39 @@
 
         </LinearLayout>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/title_task_show"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:gravity="center"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:text="@{title}"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:foreground="?attr/selectableItemBackground"
+            android:onClick="@{view -> viewModel.setTaskItem(view)}"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/progress_countdown"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:titleVisible="@{title}" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/title_task_show"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="@{title}"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:titleVisible="@{title}"
+                tools:text="Задача по умолчанию" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_refresh" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

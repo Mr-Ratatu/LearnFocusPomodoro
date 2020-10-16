@@ -2,8 +2,11 @@ package com.learn.focus.pomodoro.app.ui.fragment.timer
 
 import android.app.Application
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.*
+import androidx.navigation.findNavController
+import com.learn.focus.pomodoro.app.R
 import com.learn.focus.pomodoro.app.data.db.DatabaseManager
 import com.learn.focus.pomodoro.app.data.db.TimerTaskDao
 import com.learn.focus.pomodoro.app.data.model.TimerTask
@@ -51,6 +54,10 @@ class TimerScreenViewModel(application: Application) : AndroidViewModel(applicat
 
     fun breakTimer() {
         _breakTimer.value = TimerState.Running
+    }
+
+    fun setTaskItem(view: View) {
+        view.findNavController().navigate(R.id.action_timer_to_list)
     }
 
     fun update(timerTask: TimerTask) =

@@ -95,10 +95,16 @@ class PrefUtil {
             editor.apply()
         }
 
-        fun getBackgroundColor(context: Context) : Int {
+        fun getBackgroundColor(context: Context): Int {
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
             return preferences.getInt(BACKGROUND_COLOR, R.drawable.main_background)
         }
 
+        fun setStyleInApp(context: Context, key: String, value: Int) {
+            val preferenceManager = PreferenceManager.getDefaultSharedPreferences(context)
+            preferenceManager.edit {
+                putInt(key, value)
+            }
+        }
     }
 }

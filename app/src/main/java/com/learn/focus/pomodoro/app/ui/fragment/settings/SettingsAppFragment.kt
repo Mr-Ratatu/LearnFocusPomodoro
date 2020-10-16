@@ -1,5 +1,7 @@
 package com.learn.focus.pomodoro.app.ui.fragment.settings
 
+import android.graphics.Color
+import android.graphics.Color.*
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +14,9 @@ import com.github.dhaval2404.colorpicker.MaterialColorPickerDialog
 import com.github.dhaval2404.colorpicker.model.ColorShape
 import com.learn.focus.pomodoro.app.R
 import com.learn.focus.pomodoro.app.databinding.FragmentSettingsAppBinding
+import com.learn.focus.pomodoro.app.utils.AppConstants.Companion.BACKGROUND_COLOR
+import com.learn.focus.pomodoro.app.utils.PrefUtil
+import com.learn.focus.pomodoro.app.utils.PrefUtil.Companion.setStyleInApp
 
 class SettingsAppFragment : Fragment() {
 
@@ -45,20 +50,7 @@ class SettingsAppFragment : Fragment() {
                         .setColorListener { color, _ ->
                             settingsViewModel.color.value = color
                             binding.backgroundColor.setBackgroundColor(color)
-                        }
-                        .show()
-                }
-            })
-
-            statusBarColor.observe(viewLifecycleOwner, Observer {
-                it.getContentIfNotHandled()?.let {
-                    MaterialColorPickerDialog
-                        .Builder(view?.context!!)
-                        .setColorShape(ColorShape.SQAURE)
-                        .setTitle("Выбрать цвет")
-                        .setColorListener { color, _ ->
-                            settingsViewModel.statusBar.value = color
-                            binding.statusBarColor.setBackgroundColor(color)
+                            setStyleInApp(requireContext(), BACKGROUND_COLOR, color)
                         }
                         .show()
                 }

@@ -48,7 +48,9 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun saveTimerValues(view: View) {
-        if (timerValue.value.isNullOrEmpty()) return
+        if (timerValue.value.isNullOrEmpty()
+            || timerBreakValue.value.isNullOrEmpty()
+        ) return
 
         val edit = PreferenceManager.getDefaultSharedPreferences(view.context)
         edit.edit {
@@ -58,16 +60,6 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
 
         keyBoard.hideSoftInputFromWindow(view.windowToken, 0)
         Toast.makeText(view.context, "Настройки таймера сохранены", Toast.LENGTH_SHORT).show()
-    }
-
-    fun saveStyleInApp(view: View) {
-        val edit = PreferenceManager.getDefaultSharedPreferences(view.context)
-        edit.edit {
-            putInt(BACKGROUND_COLOR, color.value!!)
-            putInt(STATUS_BAR_COLOR, statusBar.value!!)
-        }
-
-        Toast.makeText(view.context, "Настройки стиля сохранены", Toast.LENGTH_SHORT).show()
     }
 
     fun setBackgroundColor(view: View) {

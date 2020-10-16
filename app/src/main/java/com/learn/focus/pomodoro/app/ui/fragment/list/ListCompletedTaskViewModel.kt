@@ -18,6 +18,7 @@ class ListCompletedTaskViewModel(application: Application) : AndroidViewModel(ap
     }
 
     val listTimerTask = timerTaskRepository.listTaskTimer
+
     val checkOnEmptyDB = timerTaskRepository.checkOnEmptyDB
 
     fun showCreteTaskScreen(view: View) {

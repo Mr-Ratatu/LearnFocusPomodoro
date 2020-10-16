@@ -1,17 +1,17 @@
-package com.learn.focus.pomodoro.app.ui.fragment.item
+package com.learn.focus.pomodoro.app.ui.adapter
 
 import android.content.Context
 import android.view.View
 import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.learn.focus.pomodoro.app.R
 import com.learn.focus.pomodoro.app.data.db.DatabaseManager
 import com.learn.focus.pomodoro.app.data.model.TimerTask
+import com.learn.focus.pomodoro.app.extension.snackBar
 import com.learn.focus.pomodoro.app.repository.TimerTaskRepository
-import com.learn.focus.pomodoro.app.ui.fragment.dialog.DeleteItemDialog
 import com.learn.focus.pomodoro.app.ui.fragment.list.ListCompletedTasksFragmentDirections
 import com.learn.focus.pomodoro.app.utils.PrefUtil
 import com.learn.focus.pomodoro.app.utils.TimerState
@@ -28,9 +28,22 @@ class ItemViewModel(context: Context) : ViewModel() {
     }
 
     fun showTimerFragment(view: View, timerTask: TimerTask) {
-        val action = ListCompletedTasksFragmentDirections.actionListToTimer(timerTask)
+        when (PrefUtil.getTimerState(view.context)) {
 
-        view.findNavController().navigate(action)
+            TimerState.Running,
+            TimerState.Paused,
+            TimerState.Break -> Snackbar.make(
+                view,
+                "Таймер запущен",
+                Snackbar.LENGTH_SHORT
+            ).show()
+
+            TimerState.Stopped -> {
+                val action = ListCompletedTasksFragmentDirections.actionListToTimer(timerTask)
+
+                view.findNavController().navigate(action)
+            }
+        }
     }
 
     fun showPopupMenu(view: View, timerTask: TimerTask) {
@@ -47,6 +60,9 @@ class ItemViewModel(context: Context) : ViewModel() {
                 }
                 R.id.remove_item -> {
                     delete(timerTask)
+                    view.snackBar("Задача удалена") {
+                        insert(timerTask)
+                    }
                     true
                 }
                 else -> true
@@ -72,6 +88,11 @@ class ItemViewModel(context: Context) : ViewModel() {
     private fun delete(timerTask: TimerTask) =
         viewModelScope.launch(Dispatchers.IO) {
             repository.delete(timerTask)
+        }
+
+    private fun insert(timerTask: TimerTask) =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insert(timerTask)
         }
 
 }

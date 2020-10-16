@@ -15,7 +15,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.preference.PreferenceManager
 import com.learn.focus.pomodoro.app.R
+import com.learn.focus.pomodoro.app.data.model.TimerTask
 import com.learn.focus.pomodoro.app.databinding.FragmentTimerScreenBinding
+import com.learn.focus.pomodoro.app.extension.vibratePhone
 import com.learn.focus.pomodoro.app.utils.AlarmUtils.Companion.nowSeconds
 import com.learn.focus.pomodoro.app.utils.AlarmUtils.Companion.removeAlarm
 import com.learn.focus.pomodoro.app.utils.AlarmUtils.Companion.setAlarm
@@ -70,15 +72,8 @@ class TimerScreenFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        try {
-            if (!args.timerTask.titleTask.isNullOrEmpty()) {
-                launchWithOrWithoutTask()
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
         timerScreenViewModel.apply {
+
             startTimer.observe(viewLifecycleOwner, Observer {
                 startOrBreakTimer(it, WorkState.Work)
             })
@@ -205,8 +200,12 @@ class TimerScreenFragment : Fragment() {
     }
 
     private fun onTimerFinished() {
+        vibratePhone()
         timerState = TimerState.Stopped
-        workState = WorkState.Work
+        workState = when (PrefUtil.getTimerWorkOrBreak(requireContext())) {
+            WorkState.Work -> WorkState.Break
+            else -> WorkState.Work
+        }
 
         setNewTimerLength()
 
@@ -262,10 +261,10 @@ class TimerScreenFragment : Fragment() {
     }
 
     private fun getTitleInScreen(title: String?): String {
-        return if (title.isNullOrEmpty()) {
-            getString(R.string.click_for_start)
-        } else {
-            title
+        return when {
+            title.isNullOrEmpty() -> getString(R.string.click_for_start)
+            else ->
+                title
         }
     }
 
@@ -289,25 +288,21 @@ class TimerScreenFragment : Fragment() {
                 binding.startTimer.visibility = View.GONE
                 binding.stopTimer.visibility = View.VISIBLE
                 binding.paused.visibility = View.VISIBLE
-                binding.timerBreak.visibility = View.GONE
             }
             TimerState.Stopped -> {
                 binding.startTimer.visibility = View.VISIBLE
                 binding.stopTimer.visibility = View.GONE
                 binding.paused.visibility = View.GONE
-                binding.timerBreak.visibility = View.VISIBLE
             }
             TimerState.Paused -> {
                 binding.startTimer.visibility = View.VISIBLE
                 binding.stopTimer.visibility = View.VISIBLE
                 binding.paused.visibility = View.GONE
-                binding.timerBreak.visibility = View.GONE
             }
             TimerState.Break -> {
                 binding.startTimer.visibility = View.GONE
                 binding.stopTimer.visibility = View.VISIBLE
                 binding.paused.visibility = View.VISIBLE
-                binding.timerBreak.visibility = View.GONE
             }
         }
     }

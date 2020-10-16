@@ -287,17 +287,6 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    android:onClick="@{view -> viewModel.saveStyleInApp(view)}"
-                    android:text="Сохранить"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorAccent" />
-
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
